@@ -1,7 +1,7 @@
-interface ISpanElement extends React.HTMLAttributes<HTMLSpanElement> {
+interface IMenuOption extends React.HTMLAttributes<HTMLSpanElement> {
   isActive: boolean;
 }
 
-export const ActiveElement = ({ isActive, title, className }: ISpanElement) => (
+export const MenuOption = ({ isActive, title, className }: IMenuOption) => (
   <span className={isActive ? className : ""}>{title}</span>
 );
