@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { IItem } from "../Interface/interface";
 import { ShoppingCartContext } from "../Context";
+import { CartContextType } from "../Types/Types";
 
 interface ICardProp {
   item: IItem;
@@ -12,7 +13,8 @@ export const Card = ({ item }: ICardProp): JSX.Element => {
     title,
     images,
   } = item;
-  const { setCount, count } = useContext(ShoppingCartContext);
+  const { setCount, count } =
+    useContext(ShoppingCartContext) || ({} as CartContextType);
   return (
     <div className="bg-white cursor-pointer w-56 h-60 rounded-lg">
       <figure className="relative  w-full h-4/5">

@@ -1,5 +1,6 @@
 import { Card } from "../../Components/Card";
 import { Layout } from "../../Components/Layout";
+import { ProductDetail } from "../../Components/ProductDetail";
 import { useItems } from "../../Hooks/useItems";
 
 export const Home = (): JSX.Element => {
@@ -13,6 +14,7 @@ export const Home = (): JSX.Element => {
             <Card item={item} key={item.id} />
           ))}
         </div>
+        <ProductDetail />
       </>
     </Layout>
   );
