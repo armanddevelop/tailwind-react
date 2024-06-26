@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { PlusIcon } from "@heroicons/react/24/outline";
 import { IItem } from "../Interface/interface";
 import { ShoppingCartContext } from "../Context";
 import { CartContextType } from "../Types/Types";
@@ -30,7 +31,7 @@ export const Card = ({ item }: ICardProp): JSX.Element => {
           className="absolute top-0 right-0 flex justify-center bg-stone-300 items-center w-8 h-8 rounded-full font-semibold border-2 border-neutral-300 m-2 p-1"
           onClick={() => setCount(count + 1)}
         >
-          +
+          <PlusIcon />
         </button>
       </figure>
       <p className="flex justify-around items-center">
