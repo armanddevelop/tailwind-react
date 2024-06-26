@@ -1,8 +1,8 @@
-export const getItems = async <T>(url = ""): Promise<T | Array<[]>> => {
+export const getItems = async <T>(service = ""): Promise<T | Array<[]>> => {
   try {
-    const data = await fetch(url);
+    const baseUrl = `https://api.escuelajs.co/api/v1/${service}`;
+    const data = await fetch(baseUrl);
     const items = await data.json();
-    console.log("items ", items);
     return items;
   } catch (error) {
     console.error("[getItemsError]: ", error);
