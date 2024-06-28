@@ -14,12 +14,16 @@ export const Card = ({ item }: ICardProp): JSX.Element => {
     title,
     images,
   } = item;
-  const { setCount, count } =
+  const { setCount, count, openProductDetail, setProductDetail } =
     useContext(ShoppingCartContext) || ({} as CartContextType);
+  const handleOnclick = () => {
+    openProductDetail();
+    setProductDetail(item);
+  };
   return (
     <div className="bg-white cursor-pointer w-56 h-60 rounded-lg">
-      <figure className="relative  w-full h-4/5">
-        <span className="absolute bottom-0 left-0 font-semibold text-black text-sm mx-1 mb-3">
+      <figure className="relative  w-full h-4/5" onClick={handleOnclick}>
+        <span className="absolute bottom-0 left-0 font-semibold text-black text-sm mx-1 mb-3 bg-slate-400 rounded">
           {name}
         </span>
         <img
@@ -29,13 +33,16 @@ export const Card = ({ item }: ICardProp): JSX.Element => {
         />
         <button
           className="absolute top-0 right-0 flex justify-center bg-stone-300 items-center w-8 h-8 rounded-full font-semibold border-2 border-neutral-300 m-2 p-1"
-          onClick={() => setCount(count + 1)}
+          onClick={(e) => {
+            e.stopPropagation();
+            setCount(count + 1);
+          }}
         >
           <PlusIcon />
         </button>
       </figure>
       <p className="flex justify-around items-center">
-        <span className="text-sm font-light">{title}</span>
+        <span className="text-sm font-ligh">{title}</span>
         <span className="text-lg font-medium">${price}</span>
       </p>
     </div>

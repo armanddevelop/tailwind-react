@@ -8,5 +8,10 @@ export type ShoppingCardProps = {
 };
 export type CartContextType = {
   count: number;
+  isProductDetailOpen: boolean;
+  productDetail: IItem;
   setCount: React.Dispatch<React.SetStateAction<number>>;
+  setProductDetail: React.Dispatch<React.SetStateAction<IItem | undefined>>;
+  openProductDetail: (id?: number) => void;
+  closeProductDetail: () => void;
 };
