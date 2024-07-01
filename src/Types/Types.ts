@@ -9,9 +9,12 @@ export type ShoppingCardProps = {
 export type CartContextType = {
   count: number;
   isProductDetailOpen: boolean;
+  isCheckoutSideOpen: boolean;
   productDetail: IItem;
+  cartProducts: Array<IItem>;
+  setCartProducts: React.Dispatch<React.SetStateAction<IItem[]>>;
   setCount: React.Dispatch<React.SetStateAction<number>>;
-  setProductDetail: React.Dispatch<React.SetStateAction<IItem | undefined>>;
-  openProductDetail: (id?: number) => void;
-  closeProductDetail: () => void;
+  setProductDetail: React.Dispatch<React.SetStateAction<IItem>>;
+  openSideMenu: (menuSide?: string) => void;
+  closeSideMenu: (menuSide?: string) => void;
 };

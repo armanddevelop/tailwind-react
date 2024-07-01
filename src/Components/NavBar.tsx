@@ -41,7 +41,7 @@ export const NavBar = (): JSX.Element => {
             </NavLink>
           </li>
         ))}
-        <li className="flex gap-2">
+        <li className="flex gap-2 cursor-pointer">
           {count}
           <CartIcon count={count} />
         </li>
