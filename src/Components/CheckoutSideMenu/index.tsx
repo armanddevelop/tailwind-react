@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { ShoppingCartContext } from "../../Context";
 import { XMarkIcon } from "@heroicons/react/16/solid";
 import { CartContextType } from "../../Types/Types";
+import "../../Styles/styles.css";
 
 export const CheckoutSideMenu = (): JSX.Element => {
   const { cartProducts, isCheckoutSideOpen, closeSideMenu } =
@@ -10,9 +11,10 @@ export const CheckoutSideMenu = (): JSX.Element => {
     <aside
       className={`${
         isCheckoutSideOpen ? "flex" : "hidden"
-      } product-detail  flex-col fixed right-0 border border-black rounded bg-white`}
+      } side-details   flex-col fixed right-0 border border-black rounded bg-white`}
     >
-      <div className="flex justify-end items-center p-2">
+      <div className="flex justify-between items-center p-2">
+        <h2 className="font-medium text-xl">My Order Details</h2>
         <button onClick={() => closeSideMenu("Checkout")}>
           <XMarkIcon className="size-6 text-black-500" />
         </button>

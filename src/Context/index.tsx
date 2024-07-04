@@ -35,6 +35,7 @@ export const ShoopingCardProvider = ({ children }: ShoppingCardProps) => {
   const openSideMenu = (menuSide = "") => {
     if (menuSide === "Details") {
       setIsProductDetailOpen(true);
+      setIsCheckoutSideOpen(false);
     } else if (menuSide === "Checkout") setIsCheckoutSideOpen(true);
     else if (menuSide === "") {
       setIsProductDetailOpen(false);

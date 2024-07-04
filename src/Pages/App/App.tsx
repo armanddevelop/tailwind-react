@@ -3,6 +3,7 @@ import "./App.css";
 import { AppRoutes } from "../../Components/AppRoutes";
 import { NavBar } from "../../Components/NavBar";
 import { ShoopingCardProvider } from "../../Context";
+import { CheckoutSideMenu } from "../../Components/CheckoutSideMenu";
 
 export const App = (): JSX.Element => {
   return (
@@ -10,6 +11,7 @@ export const App = (): JSX.Element => {
       <ShoopingCardProvider>
         <NavBar />
         <AppRoutes />
+        <CheckoutSideMenu />
       </ShoopingCardProvider>
     </BrowserRouter>
   );

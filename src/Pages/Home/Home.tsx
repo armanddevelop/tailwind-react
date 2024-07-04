@@ -1,11 +1,11 @@
 import { Card } from "../../Components/Card";
-import { CheckoutSideMenu } from "../../Components/CheckoutSideMenu";
 import { Layout } from "../../Components/Layout";
 import { ProductDetail } from "../../Components/ProductDetail";
 import { useItems } from "../../Hooks/useItems";
 
 export const Home = (): JSX.Element => {
   const { items } = useItems();
+
   return (
     <Layout>
       <>
@@ -16,7 +16,6 @@ export const Home = (): JSX.Element => {
           ))}
         </div>
         <ProductDetail />
-        <CheckoutSideMenu />
       </>
     </Layout>
   );

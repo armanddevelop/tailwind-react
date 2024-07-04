@@ -1,8 +1,8 @@
-import { XMarkIcon } from "@heroicons/react/16/solid";
-import "./styles.css";
 import { useContext } from "react";
+import { XMarkIcon } from "@heroicons/react/16/solid";
 import { ShoppingCartContext } from "../../Context";
 import { CartContextType } from "../../Types/Types";
+import "../../Styles/styles.css";
 
 export const ProductDetail = (): JSX.Element => {
   const { isProductDetailOpen, closeSideMenu, productDetail } =
@@ -19,7 +19,7 @@ export const ProductDetail = (): JSX.Element => {
     <aside
       className={`${
         isProductDetailOpen ? "flex" : "hidden"
-      } product-detail  flex-col fixed right-0 border border-black rounded bg-white`}
+      } side-details  flex-col fixed right-0 border border-black rounded bg-white`}
     >
       <div className="flex justify-end items-center p-2">
         <button onClick={() => closeSideMenu("Details")}>

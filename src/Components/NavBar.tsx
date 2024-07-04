@@ -7,7 +7,8 @@ import { CartContextType } from "../Types/Types";
 import { CartIcon } from "./CartIcon";
 
 export const NavBar = (): JSX.Element => {
-  const { count } = useContext(ShoppingCartContext) || ({} as CartContextType);
+  const { count, openSideMenu } =
+    useContext(ShoppingCartContext) || ({} as CartContextType);
 
   return (
     <nav className="flex justify-between items-center fixed z-10 top-0 w-full py-5 px-8 tx-sm font-light">
@@ -41,7 +42,10 @@ export const NavBar = (): JSX.Element => {
             </NavLink>
           </li>
         ))}
-        <li className="flex gap-2 cursor-pointer">
+        <li
+          className="flex gap-2 cursor-pointer"
+          onClick={() => openSideMenu("Checkout")}
+        >
           {count}
           <CartIcon count={count} />
         </li>

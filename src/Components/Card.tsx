@@ -26,7 +26,8 @@ export const Card = ({ item }: ICardProp): JSX.Element => {
     openSideMenu("Details");
     setProductDetail(item);
   };
-  const addProductToCart = (product: IItem) => {
+  const addProductToCart = (evt: React.MouseEvent, product: IItem) => {
+    evt.stopPropagation();
     setCartProducts([...cartProducts, product]);
     setCount(count + 1);
     openSideMenu("Checkout");
@@ -45,10 +46,7 @@ export const Card = ({ item }: ICardProp): JSX.Element => {
         />
         <button
           className="absolute top-0 right-0 flex justify-center bg-stone-300 items-center w-8 h-8 rounded-full font-semibold border-2 border-neutral-300 m-2 p-1"
-          onClick={(e) => {
-            e.stopPropagation();
-            addProductToCart(item);
-          }}
+          onClick={(evt) => addProductToCart(evt, item)}
         >
           <PlusIcon />
         </button>
