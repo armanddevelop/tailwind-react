@@ -19,4 +19,5 @@ export interface IItem {
   creationAt: Date;
   updatedAt: Date;
   category: ICategory;
+  quantity?: number;
 }

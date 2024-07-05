@@ -3,6 +3,7 @@ import { PlusIcon } from "@heroicons/react/24/outline";
 import { IItem } from "../Interface/interface";
 import { ShoppingCartContext } from "../Context";
 import { CartContextType } from "../Types/Types";
+import { setQuatity } from "../Helpers/cardHelpers";
 
 interface ICardProp {
   item: IItem;
@@ -28,7 +29,8 @@ export const Card = ({ item }: ICardProp): JSX.Element => {
   };
   const addProductToCart = (evt: React.MouseEvent, product: IItem) => {
     evt.stopPropagation();
-    setCartProducts([...cartProducts, product]);
+    const { productsWithQuantity } = setQuatity(cartProducts, product);
+    setCartProducts(productsWithQuantity);
     setCount(count + 1);
     openSideMenu("Checkout");
   };
