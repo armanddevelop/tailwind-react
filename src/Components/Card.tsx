@@ -4,6 +4,7 @@ import { IItem } from "../Interface/interface";
 import { ShoppingCartContext } from "../Context";
 import { CartContextType } from "../Types/Types";
 import { setQuatity } from "../Helpers/cardHelpers";
+import { calculateAmount } from "./utilsCard";
 
 interface ICardProp {
   item: IItem;
@@ -22,6 +23,7 @@ export const Card = ({ item }: ICardProp): JSX.Element => {
     setProductDetail,
     setCartProducts,
     cartProducts,
+    setTotalAmount,
   } = useContext(ShoppingCartContext) || ({} as CartContextType);
   const handleOnclick = () => {
     openSideMenu("Details");
@@ -30,9 +32,11 @@ export const Card = ({ item }: ICardProp): JSX.Element => {
   const addProductToCart = (evt: React.MouseEvent, product: IItem) => {
     evt.stopPropagation();
     const { productsWithQuantity } = setQuatity(cartProducts, product);
+    const amount = calculateAmount(productsWithQuantity);
     setCartProducts(productsWithQuantity);
     setCount(count + 1);
     openSideMenu("Checkout");
+    setTotalAmount(amount);
   };
 
   return (

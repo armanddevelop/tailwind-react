@@ -6,7 +6,7 @@ import "../../Styles/styles.css";
 import { OrderCard } from "../OrderCard";
 
 export const CheckoutSideMenu = (): JSX.Element => {
-  const { cartProducts, isCheckoutSideOpen, closeSideMenu, count } =
+  const { isCheckoutSideOpen, closeSideMenu, count } =
     useContext(ShoppingCartContext) || ({} as CartContextType);
   return (
     <aside
@@ -15,12 +15,14 @@ export const CheckoutSideMenu = (): JSX.Element => {
       } side-details   flex-col fixed right-0 border border-black rounded bg-white`}
     >
       <div className="flex justify-between items-center p-2">
-        <h2 className="font-medium text-xl">My Order Details</h2>
+        <h2 className="font-medium text-xl">
+          My Order Details ({count} products)
+        </h2>
         <button onClick={() => closeSideMenu("Checkout")}>
           <XMarkIcon className="size-6 text-black-500" />
         </button>
       </div>
-      <OrderCard cartProducts={cartProducts} />
+      <OrderCard />
     </aside>
   );
 };

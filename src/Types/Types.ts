@@ -12,9 +12,12 @@ export type CartContextType = {
   isCheckoutSideOpen: boolean;
   productDetail: IItem;
   cartProducts: Array<IItem>;
+  totalAmount: number;
+  setTotalAmount: React.Dispatch<React.SetStateAction<number>>;
   setCartProducts: React.Dispatch<React.SetStateAction<IItem[]>>;
   setCount: React.Dispatch<React.SetStateAction<number>>;
   setProductDetail: React.Dispatch<React.SetStateAction<IItem>>;
   openSideMenu: (menuSide?: string) => void;
   closeSideMenu: (menuSide?: string) => void;
+  handleDeleteProduct: (id: number, quantity: number, price: number) => void;
 };

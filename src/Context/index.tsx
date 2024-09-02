@@ -1,6 +1,7 @@
 import { useState, createContext } from "react";
 import { CartContextType, ShoppingCardProps } from "../Types/Types";
 import { IItem } from "../Interface/interface";
+import { deleteProduct } from "../Helpers/cardHelpers";
 
 export const ShoppingCartContext = createContext<CartContextType | null>(null);
 const initilaState: IItem = {
@@ -32,6 +33,9 @@ export const ShoopingCardProvider = ({ children }: ShoppingCardProps) => {
   //checkoutSideMenu
   const [isCheckoutSideOpen, setIsCheckoutSideOpen] = useState<boolean>(false);
 
+  //calculate total amount
+  const [totalAmount, setTotalAmount] = useState<number>(0);
+
   const openSideMenu = (menuSide = "") => {
     if (menuSide === "Details") {
       setIsProductDetailOpen(true);
@@ -53,13 +57,20 @@ export const ShoopingCardProvider = ({ children }: ShoppingCardProps) => {
       setIsCheckoutSideOpen(false);
     }
   };
-
+  const handleDeleteProduct = (id: number, quantity: number, price: number) => {
+    const { products } = deleteProduct(cartProducts, id);
+    setTotalAmount(totalAmount - price * quantity);
+    setCartProducts(products);
+    setCount(count - quantity);
+  };
   return (
     <ShoppingCartContext.Provider
       value={{
         cartProducts,
         count,
         productDetail,
+        totalAmount,
+        setTotalAmount,
         setCartProducts,
         setProductDetail,
         setCount,
@@ -67,6 +78,7 @@ export const ShoopingCardProvider = ({ children }: ShoppingCardProps) => {
         isCheckoutSideOpen,
         openSideMenu,
         closeSideMenu,
+        handleDeleteProduct,
       }}
     >
       {children}
