@@ -26,6 +26,11 @@ export const AppRoutes = (): ReactElement | null => {
       element: <MyOrders />,
     },
     {
+      path: "/my-orders/last",
+      name: "My Order Last",
+      element: <MyOrder />,
+    },
+    {
       path: "/sign-in",
       name: "SingIn",
       element: <SingIn />,

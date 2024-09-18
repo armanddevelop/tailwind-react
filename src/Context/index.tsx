@@ -1,6 +1,6 @@
 import { useState, createContext } from "react";
 import { CartContextType, ShoppingCardProps } from "../Types/Types";
-import { IItem } from "../Interface/interface";
+import { IItem, IItemOrder } from "../Interface/interface";
 import { deleteProduct } from "../Helpers/cardHelpers";
 
 export const ShoppingCartContext = createContext<CartContextType | null>(null);
@@ -32,9 +32,10 @@ export const ShoopingCardProvider = ({ children }: ShoppingCardProps) => {
   const [cartProducts, setCartProducts] = useState<IItem[]>([]);
   //checkoutSideMenu
   const [isCheckoutSideOpen, setIsCheckoutSideOpen] = useState<boolean>(false);
-
   //calculate total amount
   const [totalAmount, setTotalAmount] = useState<number>(0);
+  //order
+  const [orders, setOrders] = useState<IItemOrder[]>([]);
 
   const openSideMenu = (menuSide = "") => {
     if (menuSide === "Details") {
@@ -57,11 +58,26 @@ export const ShoopingCardProvider = ({ children }: ShoppingCardProps) => {
       setIsCheckoutSideOpen(false);
     }
   };
-  const handleDeleteProduct = (id: number, quantity: number, price: number) => {
-    const { products } = deleteProduct(cartProducts, id);
-    setTotalAmount(totalAmount - price * quantity);
-    setCartProducts(products);
-    setCount(count - quantity);
+  const handleDeleteProduct = (
+    idProduct: number,
+    quantity: number,
+    price: number
+  ) => {
+    if (cartProducts.length === 0) {
+      const products = deleteProduct<IItemOrder>(
+        orders,
+        idProduct,
+        quantity,
+        price
+      );
+      setOrders([...products]);
+      setCount(count - quantity);
+    } else {
+      const products = deleteProduct<IItem>(cartProducts, idProduct);
+      setTotalAmount(totalAmount - price * quantity);
+      setCartProducts(products);
+      setCount(count - quantity);
+    }
   };
   return (
     <ShoppingCartContext.Provider
@@ -70,10 +86,12 @@ export const ShoopingCardProvider = ({ children }: ShoppingCardProps) => {
         count,
         productDetail,
         totalAmount,
+        orders,
         setTotalAmount,
         setCartProducts,
         setProductDetail,
         setCount,
+        setOrders,
         isProductDetailOpen,
         isCheckoutSideOpen,
         openSideMenu,

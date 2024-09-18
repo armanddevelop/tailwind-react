@@ -1,42 +1,51 @@
 import { useContext } from "react";
-import { TrashIcon } from "@heroicons/react/24/outline";
+//import { TrashIcon } from "@heroicons/react/24/outline";
 import { ShoppingCartContext } from "../../Context";
 import { CartContextType } from "../../Types/Types";
+import { CheckoutButton } from "../../Atoms/Button";
+import { buildOder } from "./utils";
+import { Link } from "react-router-dom";
+import { Card } from "./Card";
 
 export const OrderCard = (): JSX.Element => {
-  const { handleDeleteProduct, cartProducts, totalAmount } =
-    useContext(ShoppingCartContext) || ({} as CartContextType);
+  const {
+    handleDeleteProduct,
+    cartProducts,
+    totalAmount,
+    orders,
+    setOrders,
+    setCartProducts,
+    closeSideMenu,
+  } = useContext(ShoppingCartContext) || ({} as CartContextType);
+  const handleCheckOut = () => {
+    const orderToAdd = buildOder(cartProducts, totalAmount);
+    setOrders([...orders, orderToAdd]);
+    setCartProducts([]);
+    closeSideMenu();
+  };
   return (
     <>
-      {cartProducts.map(({ quantity, id, images, title, price }) => {
-        return (
-          <div key={id}>
-            <div className="flex items-center gap-2 mt-3 ml-2">
-              <figure className="w-20 h-20">
-                <img
-                  className="w-full h-full rounded-lg object-cover"
-                  src={images[0]}
-                  alt={title}
-                />
-              </figure>
-              <p className="text-lg font-medium">
-                $ {price} X {quantity} = {quantity && price * quantity}
-              </p>
-              <button
-                onClick={() =>
-                  handleDeleteProduct(id, quantity as number, price)
-                }
-              >
-                <TrashIcon className="size-6 text-red-500" />
-              </button>
-            </div>
-            <p className="text-sm font-light mb-3 ml-3">{title}</p>
-            <hr />
-          </div>
-        );
-      })}
-      <div className="p-2">
-        <span>Total: {totalAmount} </span>
+      {cartProducts.map(({ quantity, id, images, title, price, category }) => (
+        <div key={id}>
+          <Card
+            image={images.length === 3 ? images[0] : category.image}
+            id={id}
+            quantity={quantity as number}
+            title={title}
+            price={price}
+            deleteProduct={handleDeleteProduct}
+          />
+        </div>
+      ))}
+      <div className="p-3">
+        <span className="font-medium text-xl">Total: ${totalAmount} </span>
+        <Link to="/my-orders/last">
+          <CheckoutButton
+            label="checkout"
+            onClick={handleCheckOut}
+            className="bg-black w-full py-3 text-white mt-5 rounded-lg"
+          />
+        </Link>
       </div>
     </>
   );

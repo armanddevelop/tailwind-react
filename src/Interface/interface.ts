@@ -21,3 +21,14 @@ export interface IItem {
   category: ICategory;
   quantity?: number;
 }
+
+type TypeProductOrder = Pick<
+  IItem,
+  "quantity" | "id" | "title" | "category" | "price" | "images"
+>;
+export interface IItemOrder {
+  date: Date;
+  totalAmount: number;
+  totalProducts: number;
+  products: Array<TypeProductOrder>;
+}

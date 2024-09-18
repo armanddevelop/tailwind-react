@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { IItem, IRoute } from "../Interface/interface";
+import { IItem, IRoute, IItemOrder } from "../Interface/interface";
 
 export type RoutesType = IRoute[];
 export type Items = Array<IItem>;
@@ -13,6 +13,8 @@ export type CartContextType = {
   productDetail: IItem;
   cartProducts: Array<IItem>;
   totalAmount: number;
+  orders: Array<IItemOrder>;
+  setOrders: React.Dispatch<React.SetStateAction<IItemOrder[]>>;
   setTotalAmount: React.Dispatch<React.SetStateAction<number>>;
   setCartProducts: React.Dispatch<React.SetStateAction<IItem[]>>;
   setCount: React.Dispatch<React.SetStateAction<number>>;
